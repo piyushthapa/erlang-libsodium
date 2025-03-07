@@ -29,6 +29,13 @@ static void LS_API_EXEC(utils, pad);
 static int LS_API_INIT(utils, unpad);
 static void LS_API_EXEC(utils, unpad);
 
+#ifndef strnlen
+size_t strnlen(const char *s, size_t maxlen) {
+    const char *p = memchr(s, 0, maxlen);
+    return p ? p - s : maxlen;
+}
+#endif
+
 libsodium_function_t libsodium_functions_utils[] = {LS_API_R_ARGV(utils, compare, 2),
                                                     LS_API_R_ARGV(utils, is_zero, 1),
                                                     LS_API_R_ARGV(utils, increment, 1),
